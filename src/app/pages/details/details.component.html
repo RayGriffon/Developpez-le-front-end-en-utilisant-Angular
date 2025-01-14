@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="dashboard">
+    <div class="title">
+      <h3>{{ getCountryName() }}</h3>
+    </div>    
+    <div class="medals">
+      <div class="block">
+        <p class="case">Number of entries
+          <br><div [innerHTML]="getCountryJo()"></div></p>
+      </div>
+      <div class="block">
+        <p class="case">Total number medals
+          <br><div [innerHTML]="getMedailNumber()"></div></p>
+      </div>
+      <div class="block">
+        <p class="case">Total number of athletes
+          <br><div [innerHTML]="getAthletesNumber()"></div></p>
+      </div>
+    </div>
+  </div>
+  <div class="chart">
+    <ngx-charts-line-chart
+      *ngIf="getNGXLineData() | async as data"
+      [results]="data"
+      [legend]="false"
+      [xAxis]="true"
+      [yAxis]="true"
+      xAxisLabel="Dates"
+      yAxisLabel="Médailles"
+      [showXAxisLabel]="true"
+      [showYAxisLabel]="false"
+      [xAxisTickFormatting]="xAxisFormating"
+      [yScaleMax]="yScaleMax">
+    </ngx-charts-line-chart>
+  </div>
+  <a routerLink="/home">
+    <button>Retour</button>
+  </a>
+</div>

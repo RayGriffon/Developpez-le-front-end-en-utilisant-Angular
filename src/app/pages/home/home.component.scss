@@ -1,0 +1,24 @@
+app-home .dashboard {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+app-home .container .dashboard{
+    width: 100%;
+    height: 60%;
+}
+
+app-home .pie-label{
+  font-size: 20px !important;
+}
+
+app-home .ngx-charts-tooltip-content{
+  font-size: 50 !important;
+}
+
+@media screen and (max-width: 900px) {
+  app-home .pie-label{
+    font-size: 15px !important;
+  }
+}

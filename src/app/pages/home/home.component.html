@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="dashboard">
+    <div class="title">
+      <h3>Medals per country</h3>
+    </div>
+    <div class="medals">
+      <div class="block">
+        <p class="case">Number of JOs
+          <br><div [innerHTML]="getJoNumber()"></div></p>
+      </div>
+      <div class="block">
+        <p class="case">Number of countries
+          <br><div [innerHTML]="getCountryNumber()"></div></p>
+      </div>
+    </div>
+    </div>
+  <ngx-charts-pie-chart
+    *ngIf="getNGXData() | async as data"
+    [results]="data"
+    [labels]="true"
+    (select)="onSelect($event)">
+  </ngx-charts-pie-chart>
+</div>
