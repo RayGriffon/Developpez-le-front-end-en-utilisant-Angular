@@ -6,7 +6,8 @@ Don't forget to install your node_modules before starting (`npm install`).
 
 ## Démarrer le projet
 
-Les données se trouvent dans src/assets/mock
+Les données se trouvent dans src/assets/mock et sont chargés dans olympic.service.ts -> private olympicUrl = './assets/mock/olympic.json';
+Possibilité de changer ce lien pour pointer vers une api
 
 Utilisez npm install en cas de besoin
 
