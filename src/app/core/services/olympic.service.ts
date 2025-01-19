@@ -4,6 +4,8 @@ import { BehaviorSubject, Observable, map } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Olympic } from '../models/Olympic';
 import { Router } from '@angular/router';
+import { take } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root',
@@ -80,7 +82,8 @@ calculJoNumber(): number {
     var uniqueJo: number[] = [];
     const countryParticipations = this.olympics$.pipe(
       map(olympics => olympics.find(olympic => olympic.country === country)),
-      map(olympic => olympic ? olympic.participations : [])
+      map(olympic => olympic ? olympic.participations : []),
+      take(1)
     );
 
     countryParticipations.subscribe(participations => {
@@ -98,7 +101,8 @@ calculJoNumber(): number {
     let athletes = 0;
     const countryParticipations = this.olympics$.pipe(
       map(olympics => olympics.find(olympic => olympic.country === country)),
-      map(olympic => olympic ? olympic.participations : [])
+      map(olympic => olympic ? olympic.participations : []),
+      take(1)
     );
 
     countryParticipations.subscribe(participations => {
