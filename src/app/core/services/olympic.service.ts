@@ -43,42 +43,37 @@ export class OlympicService {
     return this.errorOlympic;
   }
 
-  calculCountryMedals(country:string): number {
-    var medals = 0;
-    const countryMedals = this.olympics$.pipe(
-      map(olympics => olympics.map(olympic => ({
-      name: olympic.country,
-      medalsCount: olympic.participations.reduce((total, participation) => total + participation.medalsCount, 0)
-      })))
-    );
-    
-    countryMedals.forEach(countryMedals => {
-      countryMedals.forEach(countryMedal => {
-        if (countryMedal.name === country) {
-          medals = countryMedal.medalsCount;
-        }
-      });
+  calculCountryMedals(country: string): number {
+    let medals = 0;
+  
+    const olympics = this.olympics$.getValue();
+  
+    olympics.forEach(olympic => {
+      if (olympic.country === country) {
+        medals += olympic.participations.reduce((total, participation) => total + participation.medalsCount, 0);
+      }
     });
+  
     return medals;
+  }
+  
+
+calculJoNumber(): number {
+  let jos = 0;
+  const uniqueJo = new Set<number>();
+
+  const olympics = this.olympics$.getValue();
+
+  olympics.forEach(olympic => {
+    olympic.participations.forEach(part => {
+      uniqueJo.add(part.year); 
+    });
+  });
+
+  jos = uniqueJo.size;
+  return jos;
 }
 
-  calculJoNumber(): number {
-    var jos = 0;
-    var uniqueJo:number[] = [];
-    const participations = this.olympics$.pipe(map(olympics => olympics.map(olympic => olympic.participations)));
-    participations.forEach(participations => {
-      participations.forEach(participation => {
-        participation.forEach(part => {
-          if (!uniqueJo.includes(part.year)) {
-            uniqueJo.push(part.year);
-            jos++;
-          }
-        }
-        )
-      });
-    });
-    return jos;
-  }
 
   calculJoCountryNumber(country:string): number {
     var jos = 0;
